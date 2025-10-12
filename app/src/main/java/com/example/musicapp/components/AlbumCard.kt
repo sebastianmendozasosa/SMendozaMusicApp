@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -37,56 +39,57 @@ fun AlbumCard(
     album: Album,
     onClick : () -> Unit
 ){
-    Card(
+    Box(
         modifier = Modifier
-            .padding(8.dp)
-            .width(180.dp)
+            .width(200.dp)
+            .height(180.dp)
+            .clip(RoundedCornerShape(16.dp))
             .clickable{
                 onClick()
             },
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        AsyncImage(
+            model = album.image,
+            contentDescription = album.title,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(16.dp)),
+            contentScale = ContentScale.Crop
+        )
+
+        Row(
+            modifier = Modifier
+                .align (Alignment.BottomStart)
+                .fillMaxWidth()
+                .background(Color.Magenta.copy(alpha = 0.4f))
+                .clip(RoundedCornerShape(16.dp))
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
+            Column(
                 modifier = Modifier
-                    .height(100.dp)
-                    .width(200.dp)
-                    .fillMaxSize()
-            ){
-                AsyncImage(
-                    model = album.image,
-                    contentDescription = album.title,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(RoundedCornerShape(16.dp)),
-                    contentScale = ContentScale.Crop
+                    .weight(1f)
+            ) {
+                Text(
+                    text = album.title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.White,
+                    maxLines = 1
                 )
-                Icon(
-                    imageVector = Icons.Default.PlayArrow,
-                    contentDescription = "Play",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(48.dp)
-                        .background(Color.Black.copy(alpha = 0.5f), shape = CircleShape)
-                        .padding(8.dp)
+                Text(
+                    text = album.artist,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.White,
                 )
             }
-            Text(
-                text = album.title,
-                style = MaterialTheme.typography.titleMedium,
+            Icon(
+                imageVector = Icons.Default.PlayArrow,
+                contentDescription = "Play",
+                tint = Color.Black,
                 modifier = Modifier
-                    .padding(top = 8.dp)
-            )
-            Text(
-                text = album.artist,
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.Gray,
-                modifier = Modifier
-                    .padding(bottom = 8.dp)
+                    .size(32.dp)
+                    .background(Color.White, shape = CircleShape)
+                    .padding(4.dp)
             )
         }
     }
