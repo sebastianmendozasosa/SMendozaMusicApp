@@ -90,60 +90,7 @@ fun HomeScreen(
         }
     }   else {
         // Aquí iría la implementación de la pantalla de inicio con la lista de álbumes
-        Column (
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-                .background(BackgroundColor)
-        ){
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .clip(RoundedCornerShape(24.dp))
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Color(0xFF8E2DE2),
-                                Color(0xFF6A4CF3)
-                            )
-                        )
-                    )
-                    .padding(20.dp)
-            ){
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top
 
-                ) {
-                    Column {
-                        Text(
-                            text = "Good morning!",
-                            color = Color.White,
-                            fontSize = 16.sp
-                        )
-                        Text(
-                            text = "Sebastian Mendoza",
-                            color = Color.White,
-                            fontSize = 26.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search",
-                        tint = Color.White,
-                        modifier = Modifier.size(28.dp)
-
-                    )
-                }
-
-            }
-
-        }
 
     }
 
