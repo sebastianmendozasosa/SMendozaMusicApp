@@ -174,12 +174,11 @@ fun HomeScreen(
                         .fillMaxHeight()
                 ) {
                     items(albums) { album ->
-                        RecentCard(album = album)
-
+                        RecentCard(album = album, onClick = {
+                            navController.navigate(AlbumDetailScreenRoute(album.id))
+                        })
                     }
                 }
-
-
             }
 
             Box(
@@ -190,8 +189,8 @@ fun HomeScreen(
                 CurrPlayCard(album = albums.first())
             }
 
-
+            }
         }
     }
-}
+
 

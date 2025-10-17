@@ -1,6 +1,7 @@
 package com.example.musicapp.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,12 +33,17 @@ import org.jetbrains.annotations.Async
 
 @Composable
 fun RecentCard(
-    album: Album
+    album: Album,
+    onClick : () -> Unit
+
 ) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable{
+                onClick()
+            }
             .padding(horizontal = 16.dp, vertical = 8.dp),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -106,6 +112,7 @@ fun RecentCardPreview(){
     MusicAppTheme {
         RecentCard(
             album = sampleAlbum,
+            onClick = {}
         )
     }
 
