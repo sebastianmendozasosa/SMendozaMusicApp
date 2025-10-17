@@ -48,6 +48,7 @@ import com.example.musicapp.components.CurrPlayCard
 import com.example.musicapp.models.Album
 import com.example.musicapp.services.AlbumService
 import com.example.musicapp.ui.theme.BackgroundColor
+import com.example.musicapp.ui.theme.HomeScreenRoute
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -76,8 +77,10 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
             }
             album = result
             Log.i("AlbumDetailScreen", album.toString())
+            loading = false
 
         } catch (e: Exception) {
+            loading = false
             Log.e("AlbumDetailScreen", e.toString())
         }
 
@@ -95,171 +98,181 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
 
         album?.let { album ->
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-                    .background(BackgroundColor)
-            ) {
-                Box(
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(320.dp)
+                        .fillMaxSize()
+                        .padding(16.dp)
+                        .background(BackgroundColor)
                 ) {
-                    AsyncImage(
-                        model = album.image,
-                        contentDescription = album.title,
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-
                     Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color.Transparent,
-                                        Color(0xFF4B0082).copy(alpha = 0.85f)
+                            .fillMaxWidth()
+                            .height(320.dp)
+                    ) {
+                        AsyncImage(
+                            model = album.image,
+                            contentDescription = album.title,
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            Color.Transparent,
+                                            Color(0xFF4B0082).copy(alpha = 0.85f)
+                                        )
                                     )
                                 )
-                            )
-                    )
-
-                    Row(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Top
-                    ) {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                Icons.Default.ArrowBack,
-                                contentDescription = "Back",
-                                tint = Color.White
-                            )
-                        }
-                        IconButton(onClick = {}) {
-                            Icon(
-                                Icons.Default.FavoriteBorder,
-                                contentDescription = "Favorite",
-                                tint = Color.White
-                            )
-                        }
-                    }
-
-                    Column(
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(16.dp)
-                    ) {
-                        Text(
-                            text = album.title,
-                            fontSize = 26.sp,
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = album.artist,
-                            fontSize = 16.sp,
-                            color = Color.White.copy(alpha = 0.9f)
                         )
 
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Row {
-                            IconButton(
-                                onClick = {},
-                                modifier = Modifier
-                                    .background(Color(0xFF4B0082), CircleShape)
-                                    .size(50.dp)
-                            ) {
+                        Row(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            IconButton(onClick = {navController.navigate(HomeScreenRoute)}) {
                                 Icon(
-                                    Icons.Default.PlayArrow,
-                                    contentDescription = "Play",
+                                    Icons.Default.ArrowBack,
+                                    contentDescription = "Back",
                                     tint = Color.White
                                 )
                             }
-
-                            Spacer(modifier = Modifier.width(12.dp))
-
-                            IconButton(
-                                onClick = {},
-                                modifier = Modifier
-                                    .background(Color.White, CircleShape)
-                                    .size(50.dp)
-                            ) {
+                            IconButton(onClick = {}) {
                                 Icon(
-                                    Icons.Default.PlayArrow,
-                                    contentDescription = "Play",
-                                    tint = Color(0xFF4B0082)
+                                    Icons.Default.FavoriteBorder,
+                                    contentDescription = "Favorite",
+                                    tint = Color.White
                                 )
                             }
                         }
+
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(16.dp)
+                        ) {
+                            Text(
+                                text = album.title,
+                                fontSize = 26.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = album.artist,
+                                fontSize = 16.sp,
+                                color = Color.White.copy(alpha = 0.9f)
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Row {
+                                IconButton(
+                                    onClick = {},
+                                    modifier = Modifier
+                                        .background(Color(0xFF4B0082), CircleShape)
+                                        .size(50.dp)
+                                ) {
+                                    Icon(
+                                        Icons.Default.PlayArrow,
+                                        contentDescription = "Play",
+                                        tint = Color.White
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(12.dp))
+
+                                IconButton(
+                                    onClick = {},
+                                    modifier = Modifier
+                                        .background(Color.White, CircleShape)
+                                        .size(50.dp)
+                                ) {
+                                    Icon(
+                                        Icons.Default.PlayArrow,
+                                        contentDescription = "Play",
+                                        tint = Color(0xFF4B0082)
+                                    )
+                                }
+                            }
+                        }
+
+
+                    }
+                    Card(
+                        modifier = Modifier
+                            .padding(12.dp)
+                            .fillMaxWidth(),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(
+                            contentColor = Color.White.copy(alpha = 0.9f)
+                        ),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                text = "About this album",
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = album.description,
+                                fontSize = 15.sp,
+                                color = Color.Gray
+                            )
+                        }
                     }
 
-
-                }
-                Card(
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        contentColor = Color.White.copy(alpha = 0.9f)
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
-
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Text(
-                            text = "About this album",
+                            text = "Artist",
                             fontWeight = FontWeight.Bold,
                             color = Color.Black
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = album.description,
-                            fontSize = 15.sp,
-                            color = Color.Gray
-                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Surface(
+                            color = Color.White.copy(alpha = 0.6f),
+                            shape = RoundedCornerShape(20.dp)
+                        ) {
+                            Text(
+                                text = album.artist,
+                                modifier = Modifier
+                                    .padding(horizontal = 10.dp, vertical = 4.dp),
+                                fontSize = 12.sp,
+                                color = Color.Gray
+                            )
+                        }
                     }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    AlbumTrackCard(album = album)
                 }
 
-                Row(
+
+
+                Box(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .align(Alignment.BottomCenter)
+                        .padding(16.dp)
                 ) {
-                    Text(
-                        text = "Artist",
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Surface(
-                        color = Color.White.copy(alpha = 0.6f),
-                        shape = RoundedCornerShape(20.dp)
-                    ) {
-                        Text(
-                            text = album.artist,
-                            modifier = Modifier
-                                .padding(horizontal = 10.dp, vertical = 4.dp),
-                            fontSize = 12.sp,
-                            color = Color.Gray
-                        )
-                    }
+                    CurrPlayCard(album = album)
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
             }
-
-            AlbumTrackCard(album = album)
-
-            CurrPlayCard(album = album)
-
         }
     }
 }

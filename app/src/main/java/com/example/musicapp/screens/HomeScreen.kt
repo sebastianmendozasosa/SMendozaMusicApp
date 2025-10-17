@@ -46,6 +46,7 @@ import com.example.musicapp.components.RecentCard
 import com.example.musicapp.components.WelcomeCard
 import com.example.musicapp.models.Album
 import com.example.musicapp.services.AlbumService
+import com.example.musicapp.ui.theme.AlbumDetailScreenRoute
 import com.example.musicapp.ui.theme.BackgroundColor
 import com.example.musicapp.ui.theme.MusicAppTheme
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +60,7 @@ import kotlin.math.log
 @Composable
 
 fun HomeScreen(
-    //navController: NavController
+    navController: NavController
 ) {
 
     var albums by remember {
@@ -137,7 +138,9 @@ fun HomeScreen(
 
                     ) {
                     items(albums) { album ->
-                        AlbumCard(album = album, onClick = {})
+                        AlbumCard(album = album, onClick = {
+                            navController.navigate(AlbumDetailScreenRoute(album.id))
+                        })
                     }
 
                 }
@@ -192,12 +195,3 @@ fun HomeScreen(
     }
 }
 
-
-
-@Preview
-@Composable
-fun HomeScreenPreview(){
-    MusicAppTheme {
-        HomeScreen(/*rememberNavController()*/)
-    }
-}
