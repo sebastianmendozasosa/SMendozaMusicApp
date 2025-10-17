@@ -111,8 +111,8 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
                             .height(320.dp)
                     ) {
                         AsyncImage(
-                            model = album.image,
-                            contentDescription = album.title,
+                            model = album.image ?: "",
+                            contentDescription = album.title ?: "",
                             modifier = Modifier
                                 .fillMaxSize(),
                             contentScale = ContentScale.Crop
@@ -160,13 +160,13 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
                                 .padding(16.dp)
                         ) {
                             Text(
-                                text = album.title,
+                                text = album.title ?: "",
                                 fontSize = 26.sp,
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold
                             )
                             Text(
-                                text = album.artist,
+                                text = album.artist ?: "",
                                 fontSize = 16.sp,
                                 color = Color.White.copy(alpha = 0.9f)
                             )
@@ -225,7 +225,7 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = album.description,
+                                text = album.description ?: "",
                                 fontSize = 15.sp,
                                 color = Color.Gray
                             )

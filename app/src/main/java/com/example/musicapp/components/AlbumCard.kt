@@ -51,8 +51,8 @@ fun AlbumCard(
             },
     ) {
         AsyncImage(
-            model = album.image,
-            contentDescription = album.title,
+            model = album.image ?: "",
+            contentDescription = album.title ?: "",
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(16.dp)),

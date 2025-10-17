@@ -31,13 +31,6 @@ import com.example.musicapp.ui.theme.BackgroundColor
 
 @Composable
 fun WelcomeCard() {
-/*
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .background(BackgroundColor)
-        ) {  */
 
     Box(
         modifier = Modifier

@@ -57,8 +57,8 @@ fun RecentCard(
 
         ) {
             AsyncImage(
-                model = album.image,
-                contentDescription = album.title,
+                model = album.image ?: "",
+                contentDescription = album.title ?: "",
                 modifier = Modifier
                     .size(60.dp)
                     .clip(RoundedCornerShape(8.dp)),
