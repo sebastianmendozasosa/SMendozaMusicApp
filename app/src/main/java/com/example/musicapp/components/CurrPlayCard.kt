@@ -54,7 +54,7 @@ Card(
 
     ) {
         AsyncImage(
-            model = album.image,
+            model = album.image ?: "",
             contentDescription = album.title,
             modifier = Modifier
                 .size(60.dp)
@@ -68,14 +68,14 @@ Card(
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = album.title,
+                text = album.title ?: "",
                 style = MaterialTheme.typography.titleSmall,
                 color = Color.White
             )
             Spacer(modifier = Modifier.height(6.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = album.artist,
+                    text = album.artist ?: "",
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White
                 )

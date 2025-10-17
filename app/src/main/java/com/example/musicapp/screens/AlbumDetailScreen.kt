@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
+import com.example.musicapp.components.AlbumTrackCard
+import com.example.musicapp.components.CurrPlayCard
 import com.example.musicapp.models.Album
 import com.example.musicapp.services.AlbumService
 import com.example.musicapp.ui.theme.BackgroundColor
@@ -65,7 +67,7 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
         try {
             val retrofit = Retrofit
                 .Builder()
-                .baseUrl("https://music.juanfrausto.com/api/albums/")
+                .baseUrl("https://music.juanfrausto.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val service = retrofit.create(AlbumService::class.java)
@@ -254,12 +256,9 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                items(10)
-            }
+            AlbumTrackCard(album = album)
+
+            CurrPlayCard(album = album)
 
         }
     }

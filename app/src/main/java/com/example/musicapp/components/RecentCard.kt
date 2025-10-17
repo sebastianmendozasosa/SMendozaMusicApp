@@ -34,42 +34,6 @@ import org.jetbrains.annotations.Async
 fun RecentCard(
     album: Album
 ) {
-    /*
-    Row(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .height(100.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(Color.Gray)
-            .padding(10.dp),
-    verticalAlignment = Alignment.CenterVertically
-    ) {
-        AsyncImage(
-            model = album.image,
-            contentDescription = album.title,
-            modifier = Modifier
-                .size(50.dp)
-                .clip(RoundedCornerShape(8.dp)),
-            contentScale = ContentScale.Crop
-        )
-
-        Column(
-            modifier = Modifier
-                .padding(10.dp)
-                .weight(1f)
-        ){
-            Text(
-                album.title
-            )
-            Text(
-                album.artist,
-                style = MaterialTheme.typography.bodySmall,
-            )
-        }
-    }
-
-     */
 
     Card(
         modifier = Modifier
@@ -101,13 +65,13 @@ fun RecentCard(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = album.title,
+                    text = album.title ?: "",
                     style = MaterialTheme.typography.titleSmall,
                     color = Color.Black
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = album.artist,
+                        text = album.artist ?: "",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.Gray
                     )

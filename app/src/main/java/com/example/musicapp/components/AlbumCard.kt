@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -39,6 +40,7 @@ fun AlbumCard(
     album: Album,
     onClick : () -> Unit
 ){
+
     Box(
         modifier = Modifier
             .width(200.dp)
@@ -71,13 +73,13 @@ fun AlbumCard(
                     .weight(1f)
             ) {
                 Text(
-                    text = album.title,
+                    text = album.title ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White,
                     maxLines = 1
                 )
                 Text(
-                    text = album.artist,
+                    text = album.artist ?: "",
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White,
                 )
